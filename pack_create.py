@@ -6,13 +6,13 @@ class PackCreator:
 
     #Initializes with an initial search of potential cards
     def __init__(self, params):
-        self.x = YgoParser(params)
+        self.parser = YgoParser(params)
         self.cards_in_pack = self.x.curr_card_list
 
     #Grab initial listing of cards that meet parameters, parameters is a dictionary
     def filterPotentialPack(self, filter_params):
         cards = []
-        for i in self.x.getCardsWithInfo(filter_params):
+        for i in self.parser.getCardsWithInfo(filter_params):
             for j in self.cards_in_pack:
                 if (i == j):
                     cards.append(i)
@@ -29,7 +29,7 @@ class PackCreator:
 
     def filterOutFromPack(self, filter_params):
         cards = []
-        for i in self.x.getCardsWithInfo(filter_params):
+        for i in self.parser.getCardsWithInfo(filter_params):
             for j in self.cards_in_pack:
                 if (i != j):
                     cards.append(i)
@@ -37,10 +37,10 @@ class PackCreator:
         self.cards_in_pack = cards
 
     def finalizePack(self):
-        self.x.getCardNames(self.cards_in_pack)
+        self.parser.getCardNames(self.cards_in_pack)
     
 #{'name': 'Blue-Eyes White Dragon'}
 
 pack = PackCreator({'archetype' : 'Blue-Eyes'})
 pack.filterPotentialPack({'race' : 'Dragon'})
-print(pack.x.getCardNames(pack.cards_in_pack))
+print(pack.parser.getCardNames(pack.cards_in_pack))
