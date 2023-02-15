@@ -7,7 +7,7 @@ class PackCreator:
     #Initializes with an initial search of potential cards
     def __init__(self, params):
         self.parser = YgoParser(params)
-        self.cards_in_pack = self.x.curr_card_list
+        self.cards_in_pack = self.parser.curr_card_list
 
     #Grab initial listing of cards that meet parameters, parameters is a dictionary
     def filterPotentialPack(self, filter_params):
